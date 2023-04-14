@@ -4,7 +4,7 @@ with open("README.md", "r") as f:
     readme = f.read()
 
 setup(name='tortuemobile',
-      version='1.0',
+      version='0.5',
       description='Un module pour les tortues dans les cahiers Jupyter.',
       long_description = readme,
       author='David Hay',
