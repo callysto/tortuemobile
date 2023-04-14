@@ -1,17 +1,17 @@
 from distutils.core import setup
 
-with open("README.rst", "r") as f:
+with open("README.md", "r") as f:
     readme = f.read()
 
-setup(name='mobilechelonian',
-      version='0.5',
-      description='Turtles in the Jupyter Notebook',
+setup(name='tortuemobile',
+      version='1.0',
+      description='Un module pour les tortues dans les cahiers Jupyter.',
       long_description = readme,
-      author='Thomas Kluyver',
-      author_email='thomas@kluyver.me.uk',
-      url='https://github.com/takluyver/mobilechelonian',
-      packages=['mobilechelonian'],
-      package_data={'mobilechelonian': ['mobilechelonianjs/*.js']},
+      author='David Hay',
+      author_email='misterhay@gmail.com',
+      url='https://github.com/callysto/tortuemobile',
+      packages=['tortuemobile'],
+      package_data={'tortuemobile': ['tortuemobilejs/*.js']},
       classifiers=[
           'Framework :: IPython',
           'Intended Audience :: Education',
