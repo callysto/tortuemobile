@@ -39,38 +39,38 @@ class Tortue(widgets.DOMWidget):
         self.home()
 
     def styloenbas(self):
-        '''Put down the pen. Turtles start with their pen down.
+        '''La tortue trace des lignes. Les tortues commencent avec leur stylo en bas.
 
-        Example::
+        exemple::
 
-            t.pendown()
+            t.styloenbas()
         '''
         self.pen = 1
 
     def styloenhaut(self):
-        '''Lift up the pen.
+        '''Lever le stylo.
 
-        Example::
+        exemple::
 
-            t.penup()
+            t.styloenhaut()
         '''
         self.pen = 0
 
     def vitesse(self, speed):
-        '''Change the speed of the turtle (range 1-10).
+        '''Régler la vitesse de la tortue (1 à 10).
 
-        Example::
+        exemple::
 
-            t.speed(10) # Full speed
+            t.vitesse(10) # vitesse maximum
         '''
         self.speedVar = min(max(1, speed), 10)
 
     def droite(self, num):
-        '''Turn the Turtle num degrees to the right.
+        '''Tourner lar tortue vers la droite d'un certain nombre de degrés.
 
-        Example::
+        exemple::
 
-            t.right(90)
+            t.droite(90)
         '''
         self.bearing += num
         self.bearing = self.bearing%360
@@ -78,11 +78,11 @@ class Tortue(widgets.DOMWidget):
         self._add_point()
 
     def gauche(self, num):
-        '''Turn the Turtle num degrees to the left.
+        '''Tourner lar tortue vers la gauche d'un certain nombre de degrés.
 
-        Example::
+        exemple::
 
-            t.left(90)
+            t.gauche(90)
         '''
         self.bearing -= num
         self.bearing = self.bearing%360
@@ -90,11 +90,11 @@ class Tortue(widgets.DOMWidget):
         self._add_point()
 
     def avant(self, num):
-        '''Move the Turtle forward by num units.
+        '''Faire avancer la tortue d'un certain nombre de pixels.
 
-        Example:
+        exemple:
 
-            t.forward(100)
+            t.avant(100)
         '''
         self.posX += round(num * math.sin(math.radians(self.bearing)), 1)
         self.posY -= round(num * math.cos(math.radians(self.bearing)), 1)
@@ -113,11 +113,11 @@ class Tortue(widgets.DOMWidget):
         self._add_point()
 
     def recule(self, num):
-        '''Move the Turtle backward by num units.
+        '''Faire reculer la tortue d'un certain nombre de pixels.
 
-        Example::
+        exemple::
 
-            t.backward(100)
+            t.recule(100)
         '''
         self.posX -= round(num * math.sin(math.radians(self.bearing)), 1)
         self.posY += round(num * math.cos(math.radians(self.bearing)), 1)
@@ -136,20 +136,20 @@ class Tortue(widgets.DOMWidget):
         self._add_point()
 
     def couleurstylo(self, color):
-        '''Change the color of the pen to color. Default is black.
+        '''Modifier la couleur du stylo. Les noms des couleurs sont en anglais.
 
-        Example::
+        exemple::
 
-            t.pencolor("red")
+            t.couleurstylo("red")
         '''
         self.color = color
 
     def position(self, x, y, bearing=None):
-        """Change the position of the turtle.
+        """Déplacer la tortue à une position spécifique, (0,0) est en haut à gauche et (400, 400) est en bas à droite.
 
-        Example::
+        exemple::
 
-            t.setposition(100, 100)
+            t.position(100, 100)
         """
         self.posX = x
         self.posY = y
@@ -161,11 +161,11 @@ class Tortue(widgets.DOMWidget):
             raise ValueError("Bearing must be an integer")
 
     def cap(self, bearing):
-        """Change the bearing (angle) of the turtle.
+        """Fixer le cap de la tortue à un certain nombre de degrés.
 
-        Example::
+        exemple::
 
-            t.setbearing(180)
+            t.cap(180)
         """
         diff = self.bearing - bearing
         self.b_change = diff
@@ -179,15 +179,13 @@ class Tortue(widgets.DOMWidget):
         self.points = self.points + [p]
 
     def cercle(self, radius, extent=360):
-        """Draw a circle, or part of a circle.
+        """Faire dessiner à la tortue un morceau de cercle de rayon égal à un certain nombre de degrés.
+        
+        Un rayon positif fait tourner la tortue vers la gauche, un rayon négatif la fait tourner vers la droite.
 
-        From its current position, the turtle will draw a series of short lines,
-        turning slightly between each. If radius is positive, it will turn to
-        its left; a negative radius will make it turn to its right.
+        exemple::
 
-        Example::
-
-            t.circle(50)
+            t.cercle(50, 180)
         """
         temp = self.bearing
         self.b_change = 0;
@@ -209,11 +207,11 @@ class Tortue(widgets.DOMWidget):
         self.speedVar = tempSpeed
 
     def origine(self):
-        '''Move the Turtle to its home position.
+        '''Remettre la tortue au centre de l'écran.
 
-        Example::
+        exemple::
 
-            t.home()
+            t.origine()
         '''
         self.posX = 200
         self.posY = 200
