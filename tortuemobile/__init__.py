@@ -72,8 +72,8 @@ class Tortue(widgets.DOMWidget):
 
             t.droite(90)
         '''
-        self.bearing += num
-        self.bearing = self.bearing%360
+        self.cap += num
+        self.cap = self.cap%360
         self.b_change = num
         self._add_point()
 
@@ -84,8 +84,8 @@ class Tortue(widgets.DOMWidget):
 
             t.gauche(90)
         '''
-        self.bearing -= num
-        self.bearing = self.bearing%360
+        self.cap -= num
+        self.cap = self.cap%360
         self.b_change = -num
         self._add_point()
 
@@ -96,8 +96,8 @@ class Tortue(widgets.DOMWidget):
 
             t.avant(100)
         '''
-        self.posX += round(num * math.sin(math.radians(self.bearing)), 1)
-        self.posY -= round(num * math.cos(math.radians(self.bearing)), 1)
+        self.posX += round(num * math.sin(math.radians(self.cap)), 1)
+        self.posY -= round(num * math.cos(math.radians(self.cap)), 1)
 
         if self.posX < Tortue.OFFSET:
             self.posX = Tortue.OFFSET
@@ -119,8 +119,8 @@ class Tortue(widgets.DOMWidget):
 
             t.recule(100)
         '''
-        self.posX -= round(num * math.sin(math.radians(self.bearing)), 1)
-        self.posY += round(num * math.cos(math.radians(self.bearing)), 1)
+        self.posX -= round(num * math.sin(math.radians(self.cap)), 1)
+        self.posY += round(num * math.cos(math.radians(self.cap)), 1)
 
         if self.posX < Tortue.OFFSET:
             self.posX = Tortue.OFFSET
@@ -144,7 +144,7 @@ class Tortue(widgets.DOMWidget):
         '''
         self.couleur = couleur
 
-    def position(self, x, y, bearing=None):
+    def position(self, x, y, capVar=None):
         """Déplacer la tortue à une position spécifique, (0,0) est en haut à gauche et (400, 400) est en bas à droite.
 
         exemple::
@@ -153,23 +153,23 @@ class Tortue(widgets.DOMWidget):
         """
         self.posX = x
         self.posY = y
-        if bearing is None:
+        if capVar is None:
             self._add_point()
-        elif isinstance(bearing, int):
-            self.setbearing(bearing)
+        elif isinstance(capVar, int):
+            self.cap(capVar)
         else:
-            raise ValueError("Bearing must be an integer")
+            raise ValueError("Le cap doit être un nombre entier")
 
-    def cap(self, bearing):
+    def cap(self, capVar):
         """Fixer le cap de la tortue à un certain nombre de degrés.
 
         exemple::
 
             t.cap(180)
         """
-        diff = self.bearing - bearing
+        diff = self.cap - capVar
         self.b_change = diff
-        self.bearing = bearing
+        self.cap = capVar
         self._add_point()
         self.b_change = 0
 
@@ -187,7 +187,7 @@ class Tortue(widgets.DOMWidget):
 
             t.cercle(50, 180)
         """
-        temp = self.bearing
+        temp = self.cap
         self.b_change = 0;
         vitesseTemp = self.vitesseVar
         self.vitesseVar = 1
@@ -201,9 +201,9 @@ class Tortue(widgets.DOMWidget):
                 self.forward(n)
                 self.right(2)
         if(radius >= 0):
-            self.bearing = (temp + extent)
+            self.cap = (temp + extent)
         else:
-            self.bearing = (temp - extent)
+            self.cap = (temp - extent)
         self.vitesseVar = vitesseTemp
 
     def origine(self):
@@ -215,9 +215,9 @@ class Tortue(widgets.DOMWidget):
         '''
         self.posX = 200
         self.posY = 200
-        if 90 < self.bearing <=270:
-            self.b_change = - (self.bearing - 90)
+        if 90 < self.cap <=270:
+            self.b_change = - (self.cap - 90)
         else:
-            self.b_change = 90 - self.bearing
-        self.bearing = 90
+            self.b_change = 90 - self.cap
+        self.cap = 90
         self._add_point()
