@@ -10,11 +10,10 @@ __version__ = '0.5'
 
 def install_js():
     pkgdir = os.path.dirname(__file__)
-    nbextensions.install_nbextension(os.path.join(pkgdir, 'mobilechelonianjs'),
-                                     user=True)
+    nbextensions.install_nbextension(os.path.join(pkgdir, 'tortuemobilejs'), user=True)
 
-class Turtle(widgets.DOMWidget):
-    _view_module = Unicode("nbextensions/mobilechelonianjs/turtlewidget").tag(sync=True)
+class Tortue(widgets.DOMWidget):
+    _view_module = Unicode("nbextensions/tortuemobilejs/turtlewidget").tag(sync=True)
     _view_name = Unicode('TurtleView').tag(sync=True)
     # TODO: Make this an eventful list, so we're not transferring the whole
     # thing on every sync
@@ -23,13 +22,13 @@ class Turtle(widgets.DOMWidget):
     SIZE = 400
     OFFSET = 20
     def __init__(self):
-        '''Create a Turtle.
+        '''Créer une tortue
 
-        Example::
+        exemple::
 
-            t = Turtle()
+            t = Tortue()
         '''
-        super(Turtle, self).__init__()
+        super(Tortue, self).__init__()
         install_js()
         display(self)
         self.pen = 1
@@ -39,7 +38,7 @@ class Turtle(widgets.DOMWidget):
         self.points = []
         self.home()
 
-    def pendown(self):
+    def styloenbas(self):
         '''Put down the pen. Turtles start with their pen down.
 
         Example::
@@ -48,7 +47,7 @@ class Turtle(widgets.DOMWidget):
         '''
         self.pen = 1
 
-    def penup(self):
+    def styloenhaut(self):
         '''Lift up the pen.
 
         Example::
@@ -57,7 +56,7 @@ class Turtle(widgets.DOMWidget):
         '''
         self.pen = 0
 
-    def speed(self, speed):
+    def vitesse(self, speed):
         '''Change the speed of the turtle (range 1-10).
 
         Example::
@@ -66,7 +65,7 @@ class Turtle(widgets.DOMWidget):
         '''
         self.speedVar = min(max(1, speed), 10)
 
-    def right(self, num):
+    def droite(self, num):
         '''Turn the Turtle num degrees to the right.
 
         Example::
@@ -78,7 +77,7 @@ class Turtle(widgets.DOMWidget):
         self.b_change = num
         self._add_point()
 
-    def left(self, num):
+    def gauche(self, num):
         '''Turn the Turtle num degrees to the left.
 
         Example::
@@ -90,7 +89,7 @@ class Turtle(widgets.DOMWidget):
         self.b_change = -num
         self._add_point()
 
-    def forward(self, num):
+    def avant(self, num):
         '''Move the Turtle forward by num units.
 
         Example:
@@ -100,20 +99,20 @@ class Turtle(widgets.DOMWidget):
         self.posX += round(num * math.sin(math.radians(self.bearing)), 1)
         self.posY -= round(num * math.cos(math.radians(self.bearing)), 1)
 
-        if self.posX < Turtle.OFFSET:
-            self.posX = Turtle.OFFSET
-        if self.posY < Turtle.OFFSET:
-            self.posY = Turtle.OFFSET
+        if self.posX < Tortue.OFFSET:
+            self.posX = Tortue.OFFSET
+        if self.posY < Tortue.OFFSET:
+            self.posY = Tortue.OFFSET
 
-        if self.posX > Turtle.SIZE - Turtle.OFFSET:
-            self.posX = Turtle.SIZE - Turtle.OFFSET
-        if self.posY > Turtle.SIZE - Turtle.OFFSET:
-            self.posY = Turtle.SIZE - Turtle.OFFSET
+        if self.posX > Tortue.SIZE - Tortue.OFFSET:
+            self.posX = Tortue.SIZE - Tortue.OFFSET
+        if self.posY > Tortue.SIZE - Tortue.OFFSET:
+            self.posY = Tortue.SIZE - Tortue.OFFSET
 
         self.b_change = 0
         self._add_point()
 
-    def backward(self, num):
+    def recule(self, num):
         '''Move the Turtle backward by num units.
 
         Example::
@@ -123,20 +122,20 @@ class Turtle(widgets.DOMWidget):
         self.posX -= round(num * math.sin(math.radians(self.bearing)), 1)
         self.posY += round(num * math.cos(math.radians(self.bearing)), 1)
 
-        if self.posX < Turtle.OFFSET:
-            self.posX = Turtle.OFFSET
-        if self.posY < Turtle.OFFSET:
-            self.posY = Turtle.OFFSET
+        if self.posX < Tortue.OFFSET:
+            self.posX = Tortue.OFFSET
+        if self.posY < Tortue.OFFSET:
+            self.posY = Tortue.OFFSET
 
-        if self.posX > Turtle.SIZE - Turtle.OFFSET:
-            self.posX = Turtle.SIZE - Turtle.OFFSET
-        if self.posY > Turtle.SIZE - Turtle.OFFSET:
-            self.posY = Turtle.SIZE - Turtle.OFFSET
+        if self.posX > Tortue.SIZE - Tortue.OFFSET:
+            self.posX = Tortue.SIZE - Tortue.OFFSET
+        if self.posY > Tortue.SIZE - Tortue.OFFSET:
+            self.posY = Tortue.SIZE - Tortue.OFFSET
 
         self.b_change = 0
         self._add_point()
 
-    def pencolor(self, color):
+    def couleurstylo(self, color):
         '''Change the color of the pen to color. Default is black.
 
         Example::
@@ -145,7 +144,7 @@ class Turtle(widgets.DOMWidget):
         '''
         self.color = color
 
-    def setposition(self, x, y, bearing=None):
+    def position(self, x, y, bearing=None):
         """Change the position of the turtle.
 
         Example::
@@ -161,7 +160,7 @@ class Turtle(widgets.DOMWidget):
         else:
             raise ValueError("Bearing must be an integer")
 
-    def setbearing(self, bearing):
+    def cap(self, bearing):
         """Change the bearing (angle) of the turtle.
 
         Example::
@@ -179,7 +178,7 @@ class Turtle(widgets.DOMWidget):
                  b=self.b_change, s=self.speedVar)
         self.points = self.points + [p]
 
-    def circle(self, radius, extent=360):
+    def cercle(self, radius, extent=360):
         """Draw a circle, or part of a circle.
 
         From its current position, the turtle will draw a series of short lines,
@@ -209,7 +208,7 @@ class Turtle(widgets.DOMWidget):
             self.bearing = (temp - extent)
         self.speedVar = tempSpeed
 
-    def home(self):
+    def origine(self):
         '''Move the Turtle to its home position.
 
         Example::
