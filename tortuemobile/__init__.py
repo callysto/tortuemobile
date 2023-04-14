@@ -31,12 +31,12 @@ class Tortue(widgets.DOMWidget):
         super(Tortue, self).__init__()
         install_js()
         display(self)
-        self.pen = 1
-        self.speedVar = 1
-        self.color = "black"
-        self.bearing = 90
+        self.stylo = 1
+        self.vitesseVar = 1
+        self.couleur = "black"
+        self.cap = 90
         self.points = []
-        self.home()
+        self.origine()
 
     def styloenbas(self):
         '''La tortue trace des lignes. Les tortues commencent avec leur stylo en bas.
@@ -45,7 +45,7 @@ class Tortue(widgets.DOMWidget):
 
             t.styloenbas()
         '''
-        self.pen = 1
+        self.stylo = 1
 
     def styloenhaut(self):
         '''Lever le stylo.
@@ -54,16 +54,16 @@ class Tortue(widgets.DOMWidget):
 
             t.styloenhaut()
         '''
-        self.pen = 0
+        self.stylo = 0
 
-    def vitesse(self, speed):
+    def vitesse(self, vitesse):
         '''Régler la vitesse de la tortue (1 à 10).
 
         exemple::
 
             t.vitesse(10) # vitesse maximum
         '''
-        self.speedVar = min(max(1, speed), 10)
+        self.vitesseVar = min(max(1, vitesse), 10)
 
     def droite(self, num):
         '''Tourner lar tortue vers la droite d'un certain nombre de degrés.
@@ -135,14 +135,14 @@ class Tortue(widgets.DOMWidget):
         self.b_change = 0
         self._add_point()
 
-    def couleurstylo(self, color):
+    def couleurstylo(self, couleur):
         '''Modifier la couleur du stylo. Les noms des couleurs sont en anglais.
 
         exemple::
 
             t.couleurstylo("red")
         '''
-        self.color = color
+        self.couleur = couleur
 
     def position(self, x, y, bearing=None):
         """Déplacer la tortue à une position spécifique, (0,0) est en haut à gauche et (400, 400) est en bas à droite.
@@ -174,8 +174,8 @@ class Tortue(widgets.DOMWidget):
         self.b_change = 0
 
     def _add_point(self):
-        p = dict(p=self.pen, lc=self.color, x=self.posX, y=self.posY,
-                 b=self.b_change, s=self.speedVar)
+        p = dict(p=self.stylo, lc=self.couleur, x=self.posX, y=self.posY,
+                 b=self.b_change, s=self.vitesseVar)
         self.points = self.points + [p]
 
     def cercle(self, radius, extent=360):
@@ -189,8 +189,8 @@ class Tortue(widgets.DOMWidget):
         """
         temp = self.bearing
         self.b_change = 0;
-        tempSpeed = self.speedVar
-        self.speedVar = 1
+        vitesseTemp = self.vitesseVar
+        self.vitesseVar = 1
 
         for i in range(0, (extent//2)):
             n = math.fabs(math.radians(self.b_change) * radius)
@@ -204,7 +204,7 @@ class Tortue(widgets.DOMWidget):
             self.bearing = (temp + extent)
         else:
             self.bearing = (temp - extent)
-        self.speedVar = tempSpeed
+        self.vitesseVar = vitesseTemp
 
     def origine(self):
         '''Remettre la tortue au centre de l'écran.
