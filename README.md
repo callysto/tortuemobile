@@ -27,4 +27,4 @@ t = tortuemobile.Tortue()
 |`t.couleurstylo('rgb(R, V, B)')`|couleur de la ligne de votre tortue en utilisant valeurs de rouge, vert, et bleu de 0 à 255|`t.pencolor('rgb(0, 255, 100)')`|
 |`t.origine()`|remettre la tortue au centre de l'écran|`t.origine()`|
 |`t.position(x, y)`|déplacer la tortue à une position spécifique, (0,0) est en haut à gauche et (400, 400) est en bas à droite|`t.position(100, 250)`|
-|`t.cap(degrés)`|fixer le cap de la tortue à un certain nombre de degrés|`t.cap(90)`|
+|`t.fixecap(degrés)`|fixer le cap de la tortue à un certain nombre de degrés|`t.cap(90)`|

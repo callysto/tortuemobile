@@ -6,7 +6,7 @@ from notebook import nbextensions
 from traitlets import Unicode, List
 from IPython.display import display
 
-__version__ = '0.5'
+__version__ = '0.51'
 
 def install_js():
     pkgdir = os.path.dirname(__file__)
@@ -15,8 +15,6 @@ def install_js():
 class Tortue(widgets.DOMWidget):
     _view_module = Unicode("nbextensions/tortuemobilejs/turtlewidget").tag(sync=True)
     _view_name = Unicode('TurtleView').tag(sync=True)
-    # TODO: Make this an eventful list, so we're not transferring the whole
-    # thing on every sync
     points = List(sync=True)
 
     SIZE = 400
@@ -75,7 +73,7 @@ class Tortue(widgets.DOMWidget):
         self.cap += num
         self.cap = self.cap%360
         self.b_change = num
-        self._add_point()
+        self._ajoute_point()
 
     def gauche(self, num):
         '''Tourner lar tortue vers la gauche d'un certain nombre de degrés.
@@ -87,7 +85,7 @@ class Tortue(widgets.DOMWidget):
         self.cap -= num
         self.cap = self.cap%360
         self.b_change = -num
-        self._add_point()
+        self._ajoute_point()
 
     def avant(self, num):
         '''Faire avancer la tortue d'un certain nombre de pixels.
@@ -110,7 +108,7 @@ class Tortue(widgets.DOMWidget):
             self.posY = Tortue.SIZE - Tortue.OFFSET
 
         self.b_change = 0
-        self._add_point()
+        self._ajoute_point()
 
     def recule(self, num):
         '''Faire reculer la tortue d'un certain nombre de pixels.
@@ -133,7 +131,7 @@ class Tortue(widgets.DOMWidget):
             self.posY = Tortue.SIZE - Tortue.OFFSET
 
         self.b_change = 0
-        self._add_point()
+        self._ajoute_point()
 
     def couleurstylo(self, couleur):
         '''Modifier la couleur du stylo. Les noms des couleurs sont en anglais.
@@ -154,26 +152,26 @@ class Tortue(widgets.DOMWidget):
         self.posX = x
         self.posY = y
         if capVar is None:
-            self._add_point()
+            self._ajoute_point()
         elif isinstance(capVar, int):
-            self.cap(capVar)
+            self.fixecap(capVar)
         else:
             raise ValueError("Le cap doit être un nombre entier")
 
-    def cap(self, capVar):
+    def fixecap(self, capVar):
         """Fixer le cap de la tortue à un certain nombre de degrés.
 
         exemple::
 
-            t.cap(180)
+            t.fixecap(180)
         """
         diff = self.cap - capVar
         self.b_change = diff
         self.cap = capVar
-        self._add_point()
+        self._ajoute_point()
         self.b_change = 0
 
-    def _add_point(self):
+    def _ajoute_point(self):
         p = dict(p=self.stylo, lc=self.couleur, x=self.posX, y=self.posY,
                  b=self.b_change, s=self.vitesseVar)
         self.points = self.points + [p]
@@ -192,14 +190,14 @@ class Tortue(widgets.DOMWidget):
         vitesseTemp = self.vitesseVar
         self.vitesseVar = 1
 
-        for i in range(0, (extent//2)):
+        for i in range(0, int(extent//2)):
             n = math.fabs(math.radians(self.b_change) * radius)
             if(radius >= 0):
-                self.forward(n)
-                self.left(2)
+                self.cercle(n)
+                self.gauche(2)
             else:
-                self.forward(n)
-                self.right(2)
+                self.cercle(n)
+                self.droite(2)
         if(radius >= 0):
             self.cap = (temp + extent)
         else:
@@ -220,4 +218,4 @@ class Tortue(widgets.DOMWidget):
         else:
             self.b_change = 90 - self.cap
         self.cap = 90
-        self._add_point()
+        self._ajoute_point()
