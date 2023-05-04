@@ -42,7 +42,7 @@ define(['nbextensions/tortuemobilejs/paper', "@jupyter-widgets/base"], function(
         
         this.help_button = help_button;
         this.help_button.click(function (event){
-            alert("example:\nfrom mobilechelonian import Turtle\nt = Turtle()\nt.forward(50)\nfor help:\nhelp(Turtle)");
+            alert("exemple:\nimport tortuemobile\nt = tortuemobile.Tortue()\nt.avant(50)\nhttps://github.com/callysto/tortuemobile");
         });
         
         // some variable to play with still
