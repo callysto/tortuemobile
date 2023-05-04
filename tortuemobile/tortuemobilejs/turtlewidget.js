@@ -305,14 +305,14 @@ define(['nbextensions/tortuemobilejs/paper', "@jupyter-widgets/base"], function(
 
             // create help button 
             var helpButton = $('<button/>');
-            helpButton.append("Help!");
+            helpButton.append("Aider!");
             buttonDiv.append(helpButton);
             
             // create grid button  
             var gridButton = $('<button/>');
             gridButton.attr('id','grid-element');
             gridButton.attr('value', 0);
-            gridButton.append("Grid On/Off");
+            gridButton.append("Activer la grille");
             buttonDiv.append(gridButton);
             toinsert.append(buttonDiv);
 
