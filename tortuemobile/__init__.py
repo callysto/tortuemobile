@@ -193,10 +193,10 @@ class Tortue(widgets.DOMWidget):
         for i in range(0, int(extent//2)):
             n = math.fabs(math.radians(self.b_change) * radius)
             if(radius >= 0):
-                self.cercle(n)
+                self.avant(n)
                 self.gauche(2)
             else:
-                self.cercle(n)
+                self.avant(n)
                 self.droite(2)
         if(radius >= 0):
             self.cap = (temp + extent)
