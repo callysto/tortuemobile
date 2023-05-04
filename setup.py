@@ -4,9 +4,10 @@ with open("README.md", "r") as f:
     readme = f.read()
 
 setup(name='tortuemobile',
-      version='0.5',
+      version='0.5.2',
       description='Un module pour les tortues dans les cahiers Jupyter.',
       long_description = readme,
+      long_description_content_type = "text/markdown",
       author='David Hay',
       author_email='misterhay@gmail.com',
       url='https://github.com/callysto/tortuemobile',
